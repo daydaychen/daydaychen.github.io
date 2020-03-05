@@ -98,7 +98,10 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: 'git'
+- type: 'git'
   repo: https://gitee.com/daydaychen/daydaychen.git
+  branch: master
+- type: 'git'
+  repo: https://github.com/daydaychen/daydaychen.git
   branch: master
 
