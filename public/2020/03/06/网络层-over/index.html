@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"daydaychen.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="概述因为网络层是整个互联网的核心，因此应当让网络层尽可能简单。网络层向上只提供简单灵活的、无连接的、尽最大努力交互的数据报服务。 使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。 IP （Internet Protocol）网际协议  与 IP 协议配套使用的还有三个协议：  地址解析协议 ARP（Address Resolution Protocol） 网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[object Object]">
+<meta property="og:url" content="daydaychen.github.io/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/index.html">
+<meta property="og:site_name" content="宁静致远">
+<meta property="og:description" content="概述因为网络层是整个互联网的核心，因此应当让网络层尽可能简单。网络层向上只提供简单灵活的、无连接的、尽最大努力交互的数据报服务。 使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。 IP （Internet Protocol）网际协议  与 IP 协议配套使用的还有三个协议：  地址解析协议 ARP（Address Resolution Protocol） 网">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1Qhjjd2WG3KVjSZFP760aiXXae.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1taLpd8Gw3KVjSZFwq6zQ2FXae.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1SVrmd.uF3KVjSZK9762VtXXai.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1lZHtdWWs3KVjSZFx761WUXXaw.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1f5jAdWWs3KVjSZFxq6yWUXXao.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1AWrtd75E3KVjSZFCq6zuzXXaO.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1z_Prd.GF3KVjSZFo762mpFXao.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1swzCdYus3KVjSZKbq6xqkFXaZ.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1a7fzd8Gw3KVjSZFD760WEpXa0.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1sZjtd.WF3KVjSZPhq6xclXXaI.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1vkbYaMFY.1VjSZFq761dbXXaM.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1cR_sd3aH3KVjSZFjq6AFWpXaX.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1xEMGbfBj_uVjSZFpq6A0SXXag.jpg">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1glTAd8Kw3KVjSZFO761rDVXa0.png">
+<meta property="article:published_time" content="2020-03-06T06:01:55.065Z">
+<meta property="article:modified_time" content="2020-03-06T06:01:55.065Z">
+<meta property="article:author" content="CT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1Qhjjd2WG3KVjSZFP760aiXXae.png">
+
+<link rel="canonical" href="daydaychen.github.io/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>[object Object] | 宁静致远</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">宁静致远</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">this is a subtitle.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="daydaychen.github.io/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CT">
+      <meta itemprop="description" content="this is a desc.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宁静致远">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [object Object]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-06 14:01:55" itemprop="dateCreated datePublished" datetime="2020-03-06T14:01:55+08:00">2020-03-06</time>
+            </span>
+
+          
+            <span id="/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/" class="post-meta-item leancloud_visitors" data-flag-title="[object Object]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>因为网络层是整个互联网的核心，因此应当让网络层尽可能简单。网络层向上只提供简单灵活的、无连接的、尽最大努力交互的数据报服务。</p>
+<p>使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。</p>
+<p>IP （Internet Protocol）网际协议</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1Qhjjd2WG3KVjSZFP760aiXXae.png" alt="image"></p>
+<p>与 IP 协议配套使用的还有三个协议：</p>
+<ul>
+<li>地址解析协议 ARP（Address Resolution Protocol）</li>
+<li>网际控制报文协议 ICMP（Internet Control Message Protocol）</li>
+<li>网际组管理协议 IGMP（Internet Group Management Protocol）</li>
+</ul>
+<h4 id="虚拟互联网络"><a href="#虚拟互联网络" class="headerlink" title="虚拟互联网络"></a>虚拟互联网络</h4><p>将网络互相连接起来要使用一些<strong>中间设备</strong>。根据中间设备所在的层次，分为：</p>
+<ul>
+<li>物理层：转发器</li>
+<li>数据链路层：网桥、交换机</li>
+<li>网络层：路由器</li>
+<li>网络层以上：网关</li>
+</ul>
+<h3 id="IP数据报格式"><a href="#IP数据报格式" class="headerlink" title="IP数据报格式"></a>IP数据报格式</h3><p><img data-src="https://ae01.alicdn.com/kf/HTB1taLpd8Gw3KVjSZFwq6zQ2FXae.jpg" alt="image"></p>
+<ul>
+<li><strong>版本</strong> : 有 4（IPv4）和 6（IPv6）两个值；<br>— <strong>首部长度</strong> : 占 4 位，因此最大值为 15。值为 1 表示的是 1 个 32 位字的长度，也就是 4 字节。因为固定部分长度为 20 字节，因此该值最小为 5。如果可选字段的长度不是 4 字节的整数倍，就用尾部的填充部分来填充。</li>
+<li><strong>区分服务</strong> : 用来获得更好的服务，一般情况下不使用。</li>
+<li><strong>总长度</strong> : 包括首部长度和数据部分长度。</li>
+<li><strong>生存时间</strong> ：TTL，它的存在是为了防止无法交付的数据报在互联网中不断兜圈子。以路由器跳数为单位，当 TTL 为 0 时就丢弃数据报。</li>
+<li><strong>协议</strong> ：指出携带的数据应该上交给哪个协议进行处理，例如 ICMP、TCP、UDP 等。</li>
+<li><strong>首部检验和</strong> ：因为数据报每经过一个路由器，都要重新计算检验和，因此检验和不包含数据部分可以减少计算的工作量。</li>
+<li><strong>标识</strong> : 在数据报长度过长从而发生分片的情况下，相同数据报的不同分片具有相同的标识符。</li>
+<li><strong>片偏移</strong> : 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。</li>
+</ul>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1SVrmd.uF3KVjSZK9762VtXXai.png" alt="image"></p>
+<h4 id="IP地址编址方式"><a href="#IP地址编址方式" class="headerlink" title="IP地址编址方式"></a>IP地址编址方式</h4><p>IP地址的编址方式经历来三个历史阶段：</p>
+<ul>
+<li>分类</li>
+<li>子网划分</li>
+<li>无分类编址CIDR</li>
+</ul>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>由两部分组成，网络号和主机号，其中不同分类具有不同的网络号长度，并且是固定的。</p>
+<p>IP地址 ::={&lt;网络号&gt;,&lt;主机号&gt;}</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1lZHtdWWs3KVjSZFx761WUXXaw.png" alt=""></p>
+<blockquote>
+<pre><code>1. 同一个局域网中网络号必须相同  
+2. 用交换机互连的网段仍是一个局域网    
+3. 路由器用于连接两个不同的网段    
+4. 当两个路由器直接相连时，在连线两端的接口处，可以分配也可以不分配IP地址。不分配的话叫做无编号网络或无名网络。</code></pre></blockquote>
+<pre><code>路由表条目分类：  
+1. 特定主机路由
+2. 特定网络路由
+3. 默认路由</code></pre><h4 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h4><p>通过在主机号字段中拿一部分作为子网号，把两级IP地址划分为三级IP地址。</p>
+<p>IP地址 ::={&lt;网络号&gt;,&lt;子网号&gt;,&lt;主机号&gt;}</p>
+<p>要使用子网，必须配置子网掩码。一个B类地址的默认子网掩码为255.255.0.0，如果B类地址的子网占两个比特，那么子网掩码为11111111 11111111 11000000 00000000，也就是255.255.192.0。</p>
+<p>注意，外部网络看不到子网的存在。</p>
+<h4 id="无分类编址CIDR"><a href="#无分类编址CIDR" class="headerlink" title="无分类编址CIDR"></a>无分类编址CIDR</h4><p>无分类编址 CIDR 消除了传统 A 类、B 类和 C 类地址以及划分子网的概念，使用网络前缀和主机号来对 IP 地址进行编码，网络前缀的长度可以根据需要变化。</p>
+<p>IP 地址 ::= {&lt; 网络前缀号 &gt;, &lt; 主机号 &gt;}</p>
+<p>CIDR 的记法上采用在 IP 地址后面加上网络前缀长度的方法，例如 128.14.35.7/20 表示前 20 位为网络前缀。</p>
+<p>CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为网络前缀的长度。</p>
+<p>一个 CIDR 地址块中有很多地址，一个 CIDR 表示的网络就可以表示原来的很多个网络，并且在路由表中只需要一个路由就可以代替原来的多个路由，减少了路由表项的数量。把这种通过使用网络前缀来减少路由表项的方式称为路由聚合，也称为 构成超网 。</p>
+<p>在路由表中的项目由“网络前缀”和“下一跳地址”组成，在查找时可能会得到不止一个匹配结果，应当采用最长前缀匹配来确定应该匹配哪一个。</p>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p>网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1f5jAdWWs3KVjSZFxq6yWUXXao.jpg" alt=""></p>
+<p>ARP 实现由 IP 地址得到 MAC 地址。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1AWrtd75E3KVjSZFCq6zuzXXaO.jpg" alt=""></p>
+<p>每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。</p>
+<p>如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1z_Prd.GF3KVjSZFo762mpFXao.png" alt=""></p>
+<h3 id="网际控制报文协议ICMP"><a href="#网际控制报文协议ICMP" class="headerlink" title="网际控制报文协议ICMP"></a>网际控制报文协议ICMP</h3><p>ICMP 是问了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1swzCdYus3KVjSZKbq6xqkFXaZ.jpg" alt=""></p>
+<p>ICMP 报文分为差错报告报文和询问报文。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1a7fzd8Gw3KVjSZFD760WEpXa0.png" alt=""></p>
+<ol>
+<li>Ping</li>
+</ol>
+<p>Ping 是 ICMP 的一个重要应用，主要用来测试两台主机之间的连通性。</p>
+<p>Ping 的原理是通过向目的主机发送 ICMP Echo 请求报文，目的主机收到之后会发送 Echo 回答报文。Ping 会根据时间和成功响应的次数估算出数据包往返时间以及丢包率。</p>
+<ol start="2">
+<li>Traceroute</li>
+</ol>
+<p>Traceroute 是 ICMP 的另一个应用，用来跟踪一个分组从源点到终点的路径。</p>
+<p>Traceroute 发送的 IP 数据报封装的是无法交付的 UDP 用户数据报，并由目的主机发送终点不可达差错报告报文。</p>
+<ul>
+<li>源主机向目的主机发送一连串的 IP 数据报。第一个数据报 P1 的生存时间 TTL 设置为 1，当 P1 到达路径上的第一个路由器 R1 时，R1 收下它并把 TTL 减 1，此时 TTL 等于 0，R1 就把 P1 丢弃，并向源主机发送一个 ICMP 时间超过差错报告报文；</li>
+<li>源主机接着发送第二个数据报 P2，并把 TTL 设置为 2。P2 先到达 R1，R1 收下后把 TTL 减 1 再转发给 R2，R2 收下后也把 TTL 减 1，由于此时 TTL 等于 0，R2 就丢弃 P2，并向源主机发送一个 ICMP 时间超过差错报文。</li>
+<li>不断执行这样的步骤，直到最后一个数据报刚刚到达目的主机，主机不转发数据报，也不把 TTL 值减 1。但是因为数据报封装的是无法交付的 UDP，因此目的主机要向源主机发送 ICMP 终点不可达差错报告报文。</li>
+<li>之后源主机知道了到达目的主机所经过的路由器 IP 地址以及到达每个路由器的往返时间。</li>
+</ul>
+<h3 id="虚拟专用网VPN"><a href="#虚拟专用网VPN" class="headerlink" title="虚拟专用网VPN"></a>虚拟专用网VPN</h3><p>由于 IP 地址的紧缺，一个机构能申请到的 IP 地址数往往远小于本机构所拥有的主机数。并且一个机构并不需要把所有的主机接入到外部的互联网中，机构内的计算机可以使用仅在本机构有效的 IP 地址（专用地址）。</p>
+<blockquote>
+</blockquote>
+<pre><code>有三个专用地址块：
+- 10.0.0.0 ~ 10.255.255.255
+- 172.16.0.0 ~ 172.31.255.255
+- 192.168.0.0 ~ 192.168.255.255</code></pre><p>VPN 使用公用的互联网作为本机构各专用网之间的通信载体。专用指机构内的主机只与本机构内的其它主机通信；虚拟指好像是，而实际上并不是，它有经过公用的互联网。</p>
+<p>下图中，场所 A 和 B 的通信经过互联网，如果场所 A 的主机 X 要和另一个场所 B 的主机 Y 通信，IP 数据报的源地址是 10.1.0.1，目的地址是 10.2.0.3。数据报先发送到与互联网相连的路由器 R1，R1 对内部数据进行加密，然后重新加上数据报的首部，源地址是路由器 R1 的全球地址 125.1.2.3，目的地址是路由器 R2 的全球地址 194.4.5.6。路由器 R2 收到数据报后将数据部分进行解密，恢复原来的数据报，此时目的地址为 10.2.0.3，就交付给 Y。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1sZjtd.WF3KVjSZPhq6xclXXaI.jpg" alt=""></p>
+<h3 id="网络地址转换NAT"><a href="#网络地址转换NAT" class="headerlink" title="网络地址转换NAT"></a>网络地址转换NAT</h3><p>专用网内部的主机使用本地 IP 地址又想和互联网上的主机通信时，可以使用 NAT 来将本地 IP 转换为全球 IP。</p>
+<p>在以前，NAT 将本地 IP 和全球 IP 一一对应，这种方式下拥有 n 个全球 IP 地址的专用网内最多只可以同时有 n 台主机接入互联网。为了更有效地利用全球 IP 地址，现在常用的 NAT 转换表把传输层的端口号也用上了，使得多个专用网内部的主机共用一个全球 IP 地址。使用端口号的 NAT 也叫做网络地址与端口转换 NAPT。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1vkbYaMFY.1VjSZFq761dbXXaM.png" alt=""></p>
+<h3 id="路由器的结构"><a href="#路由器的结构" class="headerlink" title="路由器的结构"></a>路由器的结构</h3><p>路由器从功能上可以划分为：路由选择和分组转发。</p>
+<p>分组转发结构由三个部分组成：交换结构、一组输入端口和一组输出端口。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1cR_sd3aH3KVjSZFjq6AFWpXaX.jpg" alt=""></p>
+<h4 id="路由器分组转发流程"><a href="#路由器分组转发流程" class="headerlink" title="路由器分组转发流程"></a>路由器分组转发流程</h4><ul>
+<li>从数据报的首部提取目的主机的 IP 地址 D，得到目的网络地址 N。</li>
+<li>若 N 就是与此路由器直接相连的某个网络地址，则进行直接交付；</li>
+<li>若路由表中有目的地址为 D 的特定主机路由，则把数据报传送给表中所指明的下一跳路由器；</li>
+<li>若路由表中有到达网络 N 的路由，则把数据报传送给路由表中所指明的下一跳路由器；</li>
+<li>若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；</li>
+<li>报告转发分组出错。</li>
+</ul>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1xEMGbfBj_uVjSZFpq6A0SXXag.jpg" alt=""></p>
+<h3 id="路由选择协议"><a href="#路由选择协议" class="headerlink" title="路由选择协议"></a>路由选择协议</h3><p>路由选择协议都是自适应的，能随着网络通信量和拓扑结构的变化而自适应地进行调整。</p>
+<p>互联网可以划分为许多较小的自治系统 AS，一个 AS 可以使用一种和别的 AS 不同的路由选择协议。</p>
+<p>可以把路由选择协议划分为两大类：</p>
+<ul>
+<li>自治系统内部的路由选择：RIP 和 OSPF</li>
+<li>自治系统间的路由选择：BGP</li>
+</ul>
+<h4 id="内部网关协议-RIP"><a href="#内部网关协议-RIP" class="headerlink" title="内部网关协议 RIP"></a>内部网关协议 RIP</h4><p>RIP 是一种<strong>基于距离向量</strong>的路由选择协议。距离是指跳数，直接相连的路由器跳数为 1。跳数最多为 15，超过 15 表示不可达。</p>
+<p>RIP 按固定的时间间隔仅和相邻路由器交换自己的路由表，经过若干次交换之后，所有路由器最终会知道到达本自治系统中任何一个网络的最短距离和下一跳路由器地址。</p>
+<p>距离向量算法：</p>
+<ul>
+<li>对地址为 X 的相邻路由器发来的 RIP 报文，先修改报文中的所有项目，把下一跳字段中的地址改为 X，并把所有的距离字段加 1；</li>
+<li>对修改后的 RIP 报文中的每一个项目，进行以下步骤：<ul>
+<li>若原来的路由表中没有目的网络 N，则把该项目添加到路由表中；</li>
+<li>否则：若下一跳路由器地址是 X，则把收到的项目替换原来路由表中的项目；否则：若收到的项目中的距离 d 小于路由表中的距离，则进行更新（例如原始路由表项为 Net2, 5, P，新表项为 Net2, 4, X，则更新）；否则什么也不做。</li>
+</ul>
+</li>
+<li>若 3 分钟还没有收到相邻路由器的更新路由表，则把该相邻路由器标为不可达，即把距离置为 16。</li>
+</ul>
+<p>RIP 协议实现简单，开销小。但是 RIP 能使用的最大距离为 15，限制了网络的规模。并且当网络出现故障时，要经过比较长的时间才能将此消息传送到所有路由器。</p>
+<h4 id="内部网关协议-OSPF"><a href="#内部网关协议-OSPF" class="headerlink" title="内部网关协议 OSPF"></a>内部网关协议 OSPF</h4><p>开放最短路径优先 OSPF，是为了克服 RIP 的缺点而开发出来的。</p>
+<p>开放表示 OSPF 不受某一家厂商控制，而是公开发表的；最短路径优先表示使用了 Dijkstra 提出的最短路径算法 SPF。</p>
+<p>OSPF 具有以下特点：</p>
+<ul>
+<li>向本自治系统中的所有路由器发送信息，这种方法是洪泛法。</li>
+<li>发送的信息就是与相邻路由器的链路状态，链路状态包括与哪些路由器相连以及链路的度量，度量用费用、距离、时延、带宽等来表示。</li>
+<li>只有当链路状态发生变化时，路由器才会发送信息。</li>
+</ul>
+<p>所有路由器都具有全网的拓扑结构图，并且是一致的。相比于 RIP，OSPF 的更新过程收敛的很快。</p>
+<h4 id="外部网关协议-BGP"><a href="#外部网关协议-BGP" class="headerlink" title="外部网关协议 BGP"></a>外部网关协议 BGP</h4><p>BGP（Border Gateway Protocol，边界网关协议）</p>
+<p>AS 之间的路由选择很困难，主要是由于：</p>
+<ul>
+<li>互联网规模很大；</li>
+<li>各个 AS 内部使用不同的路由选择协议，无法准确定义路径的度量；</li>
+<li>AS 之间的路由选择必须考虑有关的策略，比如有些 AS 不愿意让其它 AS 经过。<br>BGP 只能寻找一条比较好的路由，而不是最佳路由。</li>
+</ul>
+<p>每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。</p>
+<p><img data-src="https://ae01.alicdn.com/kf/HTB1glTAd8Kw3KVjSZFO761rDVXa0.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/" rel="prev" title="[object Object]">
+      <i class="fa fa-chevron-left"></i> [object Object]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/06/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82-over/" rel="next" title="[object Object]">
+      [object Object] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟互联网络"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟互联网络</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据报格式"><span class="nav-number">2.</span> <span class="nav-text">IP数据报格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址编址方式"><span class="nav-number">2.1.</span> <span class="nav-text">IP地址编址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分类"><span class="nav-number">2.2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子网划分"><span class="nav-number">2.3.</span> <span class="nav-text">子网划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无分类编址CIDR"><span class="nav-number">2.4.</span> <span class="nav-text">无分类编址CIDR</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址解析协议ARP"><span class="nav-number">3.</span> <span class="nav-text">地址解析协议ARP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网际控制报文协议ICMP"><span class="nav-number">4.</span> <span class="nav-text">网际控制报文协议ICMP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟专用网VPN"><span class="nav-number">5.</span> <span class="nav-text">虚拟专用网VPN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络地址转换NAT"><span class="nav-number">6.</span> <span class="nav-text">网络地址转换NAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由器的结构"><span class="nav-number">7.</span> <span class="nav-text">路由器的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#路由器分组转发流程"><span class="nav-number">7.1.</span> <span class="nav-text">路由器分组转发流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由选择协议"><span class="nav-number">8.</span> <span class="nav-text">路由选择协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内部网关协议-RIP"><span class="nav-number">8.1.</span> <span class="nav-text">内部网关协议 RIP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部网关协议-OSPF"><span class="nav-number">8.2.</span> <span class="nav-text">内部网关协议 OSPF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外部网关协议-BGP"><span class="nav-number">8.3.</span> <span class="nav-text">外部网关协议 BGP</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CT"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">CT</p>
+  <div class="site-description" itemprop="description">this is a desc.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/daydaychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;daydaychen" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ctt0120@foxmail.com" title="E-Mail → mailto:ctt0120@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CT</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '9bBjpz3HRuKNuKNp7T27dFsT-gzGzoHsz',
+      appKey     : 'k2pzqGWjkjrKxlFLQ3O0oqDn',
+      placeholder: "Just go go",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

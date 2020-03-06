@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"daydaychen.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="物理层物理层的基本概念物理层的主要作用 机器特性、电气特性、功能特性、过程特性  数据通信的基本知识消息、数据、信号之间的关系 通信的目的是传送消息（message），数据（data）是运送消息的实体，信号（signal）是数据的电气或电磁的表现  信号的分类 模拟信号（连续信号）  数字信号（离散信号）代表不同离散数值的基本波形就称为码元   信道 一条通信线路往往包含一条发送信道和一条接收信道">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[object Object]">
+<meta property="og:url" content="daydaychen.github.io/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/index.html">
+<meta property="og:site_name" content="宁静致远">
+<meta property="og:description" content="物理层物理层的基本概念物理层的主要作用 机器特性、电气特性、功能特性、过程特性  数据通信的基本知识消息、数据、信号之间的关系 通信的目的是传送消息（message），数据（data）是运送消息的实体，信号（signal）是数据的电气或电磁的表现  信号的分类 模拟信号（连续信号）  数字信号（离散信号）代表不同离散数值的基本波形就称为码元   信道 一条通信线路往往包含一条发送信道和一条接收信道">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/c34f4503-f62c-4043-9dc6-3e03288657df.jpg">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/4aa5e057-bc57-4719-ab57-c6fbc861c505.png">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/67582ade-d44a-46a6-8757-3c1296cc1ef9.png">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/6283be2a-814a-4a10-84bf-9592533fe6bc.png">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/308a02e9-3346-4251-8c41-bd5536dab491.png">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/6fda1dc7-5c74-49c1-bb79-237a77e43a43.png">
+<meta property="og:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e325a903-f0b1-4fbd-82bf-88913dc2f290.png">
+<meta property="article:published_time" content="2020-03-06T06:01:54.344Z">
+<meta property="article:modified_time" content="2020-03-06T06:01:54.344Z">
+<meta property="article:author" content="CT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/c34f4503-f62c-4043-9dc6-3e03288657df.jpg">
+
+<link rel="canonical" href="daydaychen.github.io/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>[object Object] | 宁静致远</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">宁静致远</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">this is a subtitle.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="daydaychen.github.io/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CT">
+      <meta itemprop="description" content="this is a desc.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宁静致远">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [object Object]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-06 14:01:54" itemprop="dateCreated datePublished" datetime="2020-03-06T14:01:54+08:00">2020-03-06</time>
+            </span>
+
+          
+            <span id="/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/" class="post-meta-item leancloud_visitors" data-flag-title="[object Object]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/06/%E7%89%A9%E7%90%86%E5%B1%82-over/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><h4 id="物理层的基本概念"><a href="#物理层的基本概念" class="headerlink" title="物理层的基本概念"></a>物理层的基本概念</h4><h5 id="物理层的主要作用"><a href="#物理层的主要作用" class="headerlink" title="物理层的主要作用"></a>物理层的主要作用</h5><ul>
+<li>机器特性、电气特性、功能特性、过程特性</li>
+</ul>
+<h4 id="数据通信的基本知识"><a href="#数据通信的基本知识" class="headerlink" title="数据通信的基本知识"></a>数据通信的基本知识</h4><h5 id="消息、数据、信号之间的关系"><a href="#消息、数据、信号之间的关系" class="headerlink" title="消息、数据、信号之间的关系"></a>消息、数据、信号之间的关系</h5><ul>
+<li>通信的目的是传送<strong>消息（message）</strong>，<strong>数据（data）</strong>是运送消息的实体，<strong>信号（signal）</strong>是数据的电气或电磁的表现</li>
+</ul>
+<h5 id="信号的分类"><a href="#信号的分类" class="headerlink" title="信号的分类"></a>信号的分类</h5><ul>
+<li><p>模拟信号（连续信号）</p>
+</li>
+<li><p>数字信号（离散信号）<br>代表不同离散数值的基本波形就称为<strong>码元</strong></p>
+</li>
+</ul>
+<h5 id="信道"><a href="#信道" class="headerlink" title="信道"></a>信道</h5><ul>
+<li>一条通信线路往往包含一条发送信道和一条接收信道</li>
+</ul>
+<h5 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h5><p>根据信息在传输线上的传输方向，分为以下三种通信方式</p>
+<ul>
+<li>单工通信：单向传输</li>
+<li>半双工通信：双向交替传输</li>
+<li>全双工通信：双向同时传输</li>
+</ul>
+<h5 id="常用的编码方式"><a href="#常用的编码方式" class="headerlink" title="常用的编码方式"></a>常用的编码方式</h5><ul>
+<li>不归零制:负电平代表0，正电平代表1。</li>
+<li>归零制：</li>
+<li>曼彻斯特编码：位周期中心的上跳变代表0，下跳变代表1</li>
+<li>差分曼彻斯特编码：位中心始终有跳变，位开始边界处有跳变代表0，没有代表1</li>
+</ul>
+<h5 id="带通调制"><a href="#带通调制" class="headerlink" title="带通调制"></a>带通调制</h5><ul>
+<li>基带信号：计算机输出的代表各种文字或图像文件的数字信号都属于基带信号</li>
+</ul>
+<p>基带信号往往包含由较多低频或直流成分，而许多信道并不能传输这种低频分量或直流分量，因此，需要对基带信号进行<strong>调制</strong></p>
+<ul>
+<li>基带调制：<strong>对基带信号的波形进行变换</strong>，使其能够与信道特性相适应，变换后的信号仍是基带信号，称为编码  </li>
+<li>带通调制：对基带信号使用<strong>载波</strong>进行调制，把基带信号的频率范围搬移到较高的频段，并转换为模拟信号，称为带通信号。</li>
+</ul>
+<p><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/c34f4503-f62c-4043-9dc6-3e03288657df.jpg" alt="image"></p>
+<h6 id="基本的带通调制方法"><a href="#基本的带通调制方法" class="headerlink" title="基本的带通调制方法"></a>基本的带通调制方法</h6><ul>
+<li>调幅（AM）：即载波的振幅随基带数字信号而变化</li>
+<li>调频（FM）：即载波的频率随基带数字信号而变化</li>
+<li>调相（PM）：即载波的初始相位随基带数字信号而变化</li>
+</ul>
+<h4 id="传输媒体"><a href="#传输媒体" class="headerlink" title="传输媒体"></a>传输媒体</h4><h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><ul>
+<li>导引型传输媒体（有线）<ul>
+<li>双绞线<ol>
+<li>无屏蔽双绞线</li>
+<li>屏蔽双绞线</li>
+</ol>
+</li>
+<li>同轴电缆</li>
+<li>光缆<ul>
+<li>单模光纤</li>
+<li>多模光纤</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非导引型传输媒体（无线）<ul>
+<li>主要采用无线电微波通信，频率范围：300MHz～300GHz（波长1m～1mm），主要使用2～40GHz范围<ul>
+<li>微波通信分为：地面微波接力通信、卫星通信</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="信道复用技术"><a href="#信道复用技术" class="headerlink" title="信道复用技术"></a>信道复用技术</h4><h5 id="1-频分复用FDM（Frequency-Division-Multiplexing）"><a href="#1-频分复用FDM（Frequency-Division-Multiplexing）" class="headerlink" title="1.频分复用FDM（Frequency Division Multiplexing）"></a>1.频分复用FDM（Frequency Division Multiplexing）</h5><p>频分复用的所有主机在相同的时间占用不同的频率带宽资源。<br><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/4aa5e057-bc57-4719-ab57-c6fbc861c505.png" alt="image"></p>
+<h5 id="2-时分复用TDM（Time-DM）"><a href="#2-时分复用TDM（Time-DM）" class="headerlink" title="2.时分复用TDM（Time DM）"></a>2.时分复用TDM（Time DM）</h5><p>时分复用的所有主机在不同的时间占用相同的频率带宽资源<br><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/67582ade-d44a-46a6-8757-3c1296cc1ef9.png" alt="image"><br>使用频分使用和时分复用进行通信，在通信的过程中主机会一直占用一部分信道资源。但是由于计算机数据的突发性质，通信过程没必要一直占用信道资源而不让出给其他用户使用，因此这两种方式对信道的利用率都不高</p>
+<h5 id="3-统计时分复用STDM（Statistic-TDM）"><a href="#3-统计时分复用STDM（Statistic-TDM）" class="headerlink" title="3.统计时分复用STDM（Statistic TDM）"></a>3.统计时分复用STDM（Statistic TDM）</h5><p>是对时分复用的一种改进，不固定每个用户在时分复用帧中的位置，只要有数据就集中起来组成统计时分复用帧然后发送。<br><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/6283be2a-814a-4a10-84bf-9592533fe6bc.png" alt="image"></p>
+<h5 id="4-波分复用WDM（Wavelength-DM）"><a href="#4-波分复用WDM（Wavelength-DM）" class="headerlink" title="4.波分复用WDM（Wavelength DM）"></a>4.波分复用WDM（Wavelength DM）</h5><p>光的频分复用，由于光的频率很高，因此习惯上用波长而不是频率来表示所使用的光载波。</p>
+<h5 id="5-码分复用CDM（Code-DM）"><a href="#5-码分复用CDM（Code-DM）" class="headerlink" title="5.码分复用CDM（Code DM）"></a>5.码分复用CDM（Code DM）</h5><p>为每个用户分配m bit的码片，并且所有的码片正交，对于任意两个码片S和T有</p>
+<p><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/308a02e9-3346-4251-8c41-bd5536dab491.png" alt="image"></p>
+<p>为了讨论方便，取m=8，设码片S为00011011。在拥有该码片的用户发送比特1时就发送该码片，发送比特0时就发送该码片的反码11100100。</p>
+<p>在计算时将00011011记作（-1 -1 -1 +1 +1 -1 +1 +1），就可以得到</p>
+<p><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/6fda1dc7-5c74-49c1-bb79-237a77e43a43.png" alt="image"></p>
+<p><img data-src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e325a903-f0b1-4fbd-82bf-88913dc2f290.png" alt="image"></p>
+<p>其中S’ 为S 的反码。</p>
+<p>利用上面的式子可以知道，当接收端使用码片S对接收到的数据进行内积运算时，结果为0的时其他用户发送的数据，结果为1的时用户发送的比特1，结果为-1的是用户发送的比特0。</p>
+<p>码分复用需要发送的数据量为原先的m倍。</p>
+<h4 id="数字传输系统"><a href="#数字传输系统" class="headerlink" title="数字传输系统"></a>数字传输系统</h4><p>由于历史原因，多路复用的速率体系有两个互不兼容的国际标准，北美和日本的T1速率（1.544Mbit/s），欧洲的E1速率（2.048Mbit/s）</p>
+<p>ITU-T制定的SDH中，STM-1的传输速率为155.52 Mbit/s</p>
+<h4 id="宽带接入技术"><a href="#宽带接入技术" class="headerlink" title="宽带接入技术"></a>宽带接入技术</h4><p>ADSL（Asymmetric Digital Subscriber Line）非对称数字用户线技术<br>是用数字技术对现有的模拟电话用户线进行改造，使其能够承载宽带数字业务。<br>虽然标准模拟电话信号的频带被限制在300～3400Hz范围内，但用户线本身实际可通过的信号频率却超过1MHz。<br>ADSL技术把0～4kHz低端频谱留给传统电话使用，而把原来没有被利用的高端频谱留给用户上网使用。<br>ADSL的下行带宽远远大于上行带宽，“非对称”这个名词就是这样得出来的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/06/%E5%BA%94%E7%94%A8%E5%B1%82-over/" rel="prev" title="[object Object]">
+      <i class="fa fa-chevron-left"></i> [object Object]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/06/%E7%BD%91%E7%BB%9C%E5%B1%82-over/" rel="next" title="[object Object]">
+      [object Object] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理层"><span class="nav-number">1.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#物理层的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">物理层的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#物理层的主要作用"><span class="nav-number">1.1.1.</span> <span class="nav-text">物理层的主要作用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据通信的基本知识"><span class="nav-number">1.2.</span> <span class="nav-text">数据通信的基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#消息、数据、信号之间的关系"><span class="nav-number">1.2.1.</span> <span class="nav-text">消息、数据、信号之间的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#信号的分类"><span class="nav-number">1.2.2.</span> <span class="nav-text">信号的分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#信道"><span class="nav-number">1.2.3.</span> <span class="nav-text">信道</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通信方式"><span class="nav-number">1.2.4.</span> <span class="nav-text">通信方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常用的编码方式"><span class="nav-number">1.2.5.</span> <span class="nav-text">常用的编码方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#带通调制"><span class="nav-number">1.2.6.</span> <span class="nav-text">带通调制</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基本的带通调制方法"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">基本的带通调制方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#传输媒体"><span class="nav-number">1.3.</span> <span class="nav-text">传输媒体</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分类"><span class="nav-number">1.3.1.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信道复用技术"><span class="nav-number">1.4.</span> <span class="nav-text">信道复用技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-频分复用FDM（Frequency-Division-Multiplexing）"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.频分复用FDM（Frequency Division Multiplexing）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-时分复用TDM（Time-DM）"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.时分复用TDM（Time DM）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-统计时分复用STDM（Statistic-TDM）"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.统计时分复用STDM（Statistic TDM）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-波分复用WDM（Wavelength-DM）"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.波分复用WDM（Wavelength DM）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-码分复用CDM（Code-DM）"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.码分复用CDM（Code DM）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数字传输系统"><span class="nav-number">1.5.</span> <span class="nav-text">数字传输系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#宽带接入技术"><span class="nav-number">1.6.</span> <span class="nav-text">宽带接入技术</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CT"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">CT</p>
+  <div class="site-description" itemprop="description">this is a desc.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/daydaychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;daydaychen" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ctt0120@foxmail.com" title="E-Mail → mailto:ctt0120@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CT</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '9bBjpz3HRuKNuKNp7T27dFsT-gzGzoHsz',
+      appKey     : 'k2pzqGWjkjrKxlFLQ3O0oqDn',
+      placeholder: "Just go go",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"daydaychen.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":true,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="硬件平台：XiaoMi Air12.5 m3-6y30 4G+128G完整备份win10系统建议使用win10系统自带备份功能。 恢复win10系统安装黑苹果会格掉整个盘，所以恢复时在U盘PE下使用系统镜像的install.wim软件左下角的恢复系统功能来进行恢复。 准备文件 系统镜像         mirror 刻盘软件etcher   etcher 专用EFI          EFI wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[object Object]">
+<meta property="og:url" content="daydaychen.github.io/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="宁静致远">
+<meta property="og:description" content="硬件平台：XiaoMi Air12.5 m3-6y30 4G+128G完整备份win10系统建议使用win10系统自带备份功能。 恢复win10系统安装黑苹果会格掉整个盘，所以恢复时在U盘PE下使用系统镜像的install.wim软件左下角的恢复系统功能来进行恢复。 准备文件 系统镜像         mirror 刻盘软件etcher   etcher 专用EFI          EFI wi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-06T06:01:58.574Z">
+<meta property="article:modified_time" content="2020-03-06T06:01:58.574Z">
+<meta property="article:author" content="CT">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="daydaychen.github.io/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>[object Object] | 宁静致远</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">宁静致远</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">this is a subtitle.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="daydaychen.github.io/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CT">
+      <meta itemprop="description" content="this is a desc.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="宁静致远">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [object Object]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-06 14:01:58" itemprop="dateCreated datePublished" datetime="2020-03-06T14:01:58+08:00">2020-03-06</time>
+            </span>
+
+          
+            <span id="/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="[object Object]" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/06/%E5%AE%89%E8%A3%85%E9%BB%91%E8%8B%B9%E6%9E%9C%E5%B0%8F%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="硬件平台：XiaoMi-Air12-5-m3-6y30-4G-128G"><a href="#硬件平台：XiaoMi-Air12-5-m3-6y30-4G-128G" class="headerlink" title="硬件平台：XiaoMi Air12.5 m3-6y30 4G+128G"></a>硬件平台：XiaoMi Air12.5 m3-6y30 4G+128G</h3><h4 id="完整备份win10系统"><a href="#完整备份win10系统" class="headerlink" title="完整备份win10系统"></a>完整备份win10系统</h4><p>建议使用win10系统自带备份功能。</p>
+<h5 id="恢复win10系统"><a href="#恢复win10系统" class="headerlink" title="恢复win10系统"></a>恢复win10系统</h5><p>安装黑苹果会格掉整个盘，所以恢复时在U盘PE下使用系统镜像的install.wim软件左下角的恢复系统功能来进行恢复。</p>
+<h4 id="准备文件"><a href="#准备文件" class="headerlink" title="准备文件"></a>准备文件</h4><ol>
+<li>系统镜像         <a href="https://blog.daliansky.net/macOS-Mojave-10.14.4-18E226-official-version-with-Clover-4903-original-image.html" target="_blank" rel="noopener">mirror</a></li>
+<li>刻盘软件etcher   <a href="https://www.balena.io/etcher/" target="_blank" rel="noopener">etcher</a></li>
+<li>专用EFI          <a href="https://github.com/johnnync13/EFI-Xiaomi-Notebook-air-12-5.git" target="_blank" rel="noopener">EFI</a></li>
+<li>win10备份U盘，16G以上</li>
+<li>黑苹果系统U盘，8G以上</li>
+</ol>
+<h4 id="制作安装镜像"><a href="#制作安装镜像" class="headerlink" title="制作安装镜像"></a>制作安装镜像</h4><ol>
+<li>格式化U盘</li>
+<li>打开etcher软件</li>
+<li>傻瓜式操作</li>
+</ol>
+<h4 id="替换EFI"><a href="#替换EFI" class="headerlink" title="替换EFI"></a>替换EFI</h4><p>因为镜像自带的EFI不兼容air12.5，所以我们要手动替换为专用EFI</p>
+<p>win10磁盘管理工具可以进入U盘的EFI分区，将专用EFI中的EFI目录替换进U盘EFI分区中</p>
+<h4 id="小米BIOS设置"><a href="#小米BIOS设置" class="headerlink" title="小米BIOS设置"></a>小米BIOS设置</h4><h5 id="升级BIOS版本至A05"><a href="#升级BIOS版本至A05" class="headerlink" title="升级BIOS版本至A05"></a>升级BIOS版本至A05</h5><p>A04版本的BIOS有关机不断掉的Bug，所以我们需要更新BIOS至A05</p>
+<p>下载链接: <a href="http://bbs.xiaomi.cn/t-13100333" target="_blank" rel="noopener">BIOS-A05</a></p>
+<p>按照帖子描述一键刷入即可。</p>
+<h5 id="设置BIOS"><a href="#设置BIOS" class="headerlink" title="设置BIOS"></a>设置BIOS</h5><p>关闭Secure Boot模式，不然无法引导至macOS。</p>
+<ol>
+<li>开机按F2进BIOS</li>
+<li>Security -&gt; Set Supervisor Password -&gt; Installed  # 不设置密码不能关闭</li>
+<li>Securt Boot Mode -&gt; Disabled</li>
+</ol>
+<blockquote>
+<p>开机按F12进入Boot Manager，设置从U盘启动。</p>
+</blockquote>
+<h4 id="安装黑苹果"><a href="#安装黑苹果" class="headerlink" title="安装黑苹果"></a>安装黑苹果</h4><p>首先进入Clover界面，Clover是一个黑苹果引导工具，因为macOS不支持非苹果机运行，所以我们要通过第三方工具来修正一系列底层参数，以正确的在非苹果机上引导macOS，该程序就是Clover</p>
+<ol>
+<li>屏幕亮起，进入Clover</li>
+<li>选择 Boot OS X Install from XiaoMi</li>
+<li>拷贝镜像到磁盘。。。。。。。。。</li>
+</ol>
+<p>进入macOS恢复模式，开始安装</p>
+<ol>
+<li>选择语言</li>
+</ol>
+<p>抹掉硬盘，确保你已经将所有的重要数据正确的备份到其他存储介质上。</p>
+<ol>
+<li>选中macOS实用工具 -&gt; 磁盘工具 -&gt; 左上角选项-显示所有设备</li>
+<li>选择本地磁盘SSD Media -&gt; 上方功能栏-抹掉</li>
+<li>选择默认的Mac OS扩展(日志型)  rename–&gt;Macintosh HD  -&gt; 抹掉</li>
+<li>退出磁盘工具</li>
+</ol>
+<p>真正开始安装macOS</p>
+<ol>
+<li>安装macOS</li>
+<li>进入安装界面</li>
+<li>开始安装</li>
+</ol>
+<h4 id="安装第二阶段"><a href="#安装第二阶段" class="headerlink" title="安装第二阶段"></a>安装第二阶段</h4><p>等。。。。。。</p>
+<h4 id="设置向导"><a href="#设置向导" class="headerlink" title="设置向导"></a>设置向导</h4><p>略</p>
+<h4 id="替换EFI-1"><a href="#替换EFI-1" class="headerlink" title="替换EFI"></a>替换EFI</h4><p>因为EFI分区此时还在U盘上，所以我们需要将EFI文件拷贝到本地磁盘的EFI分区上</p>
+<p>1.挂载EFI分区</p>
+<p>打开终端，输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ diskutil list                # 查看磁盘分区表</span><br><span class="line">$ diskutil mount disk0s1        # 挂载磁盘FEI分区</span><br><span class="line">$ diskutil mount disk1s1        # 挂载U盘EFI分区</span><br><span class="line">$ find .                      # 打开Finder，进行替换操作</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>合并EFI</li>
+</ol>
+<p>纯净安装macOS，没有Win10系统的EFI，不需要合并，此步省略</p>
+<ol start="3">
+<li>替换EFI</li>
+</ol>
+<p>将U盘EFI分区下的EFI目录复制到磁盘EFI分区下</p>
+<h4 id="完善网卡驱动"><a href="#完善网卡驱动" class="headerlink" title="完善网卡驱动"></a>完善网卡驱动</h4><p>Mac本身不支持小米自带的网卡型号，无解，扩展槽无法添加WIFI无线网卡，只能选择外置USB网卡。</p>
+<p>或者使用USB网络共享暂时上网 <a href="https://github.com/jwise/HoRNDIS/releases" target="_blank" rel="noopener">HoRNDIS</a>，下载安装即可。</p>
+<p>USB连接手机，手机上打开热点，即可上网。</p>
+<h4 id="开启HiDPI"><a href="#开启HiDPI" class="headerlink" title="开启HiDPI"></a>开启HiDPI</h4><p>1080P分辨率在12寸的屏幕上显示的字体特别小，所以有了开启HiDPI的需求</p>
+<p>教程链接 <a href="https://zhih.me/one-key-hidpi/" target="_blank" rel="noopener">开启HiDPI</a><br>脚本下载链接 <a href="https://github.com/xzhih/one-key-hidpi.git" target="_blank" rel="noopener">下载HiDPI</a></p>
+<h4 id="GitHub访问加速"><a href="#GitHub访问加速" class="headerlink" title="GitHub访问加速"></a>GitHub访问加速</h4><p>域名的IP地址在 <a href="https://www.ipaddress.com" target="_blank" rel="noopener">https://www.ipaddress.com</a> 查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim &#x2F;etc&#x2F;hosts</span><br><span class="line"># github</span><br><span class="line">192.30.253.112 GitHub.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">151.101.185.194 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure>
+
+<p>感谢提供专用EFI的作者<a href="https://github.com/johnnync13/" target="_blank" rel="noopener">johnnync13</a><br>感谢提供思路的<a href="http://bbs.xiaomi.cn/t-36526099" target="_blank" rel="noopener">etrock</a><br>感谢提供镜像的作者<a href="https://blog.daliansky.net" target="_blank" rel="noopener">黑果小兵</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/06/%E4%BC%A0%E8%BE%93%E5%B1%82-over/" rel="prev" title="[object Object]">
+      <i class="fa fa-chevron-left"></i> [object Object]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/06/04-%E5%B9%B6%E5%8F%91web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%9E%E7%8E%B0/" rel="next" title="[object Object]">
+      [object Object] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件平台：XiaoMi-Air12-5-m3-6y30-4G-128G"><span class="nav-number">1.</span> <span class="nav-text">硬件平台：XiaoMi Air12.5 m3-6y30 4G+128G</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完整备份win10系统"><span class="nav-number">1.1.</span> <span class="nav-text">完整备份win10系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#恢复win10系统"><span class="nav-number">1.1.1.</span> <span class="nav-text">恢复win10系统</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#准备文件"><span class="nav-number">1.2.</span> <span class="nav-text">准备文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#制作安装镜像"><span class="nav-number">1.3.</span> <span class="nav-text">制作安装镜像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换EFI"><span class="nav-number">1.4.</span> <span class="nav-text">替换EFI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小米BIOS设置"><span class="nav-number">1.5.</span> <span class="nav-text">小米BIOS设置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#升级BIOS版本至A05"><span class="nav-number">1.5.1.</span> <span class="nav-text">升级BIOS版本至A05</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置BIOS"><span class="nav-number">1.5.2.</span> <span class="nav-text">设置BIOS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装黑苹果"><span class="nav-number">1.6.</span> <span class="nav-text">安装黑苹果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装第二阶段"><span class="nav-number">1.7.</span> <span class="nav-text">安装第二阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置向导"><span class="nav-number">1.8.</span> <span class="nav-text">设置向导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换EFI-1"><span class="nav-number">1.9.</span> <span class="nav-text">替换EFI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完善网卡驱动"><span class="nav-number">1.10.</span> <span class="nav-text">完善网卡驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开启HiDPI"><span class="nav-number">1.11.</span> <span class="nav-text">开启HiDPI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub访问加速"><span class="nav-number">1.12.</span> <span class="nav-text">GitHub访问加速</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CT"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">CT</p>
+  <div class="site-description" itemprop="description">this is a desc.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/daydaychen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;daydaychen" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ctt0120@foxmail.com" title="E-Mail → mailto:ctt0120@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CT</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '9bBjpz3HRuKNuKNp7T27dFsT-gzGzoHsz',
+      appKey     : 'k2pzqGWjkjrKxlFLQ3O0oqDn',
+      placeholder: "Just go go",
+      avatar     : 'robohash',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+</body>
+</html>
